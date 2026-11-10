@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão | Gestão</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">C.</div>s
+            <div>
+                <h2>CAIXA<span>DA LOJA</span></h2>
+                <small>SISTEMA DE GESTÃO</small>
+            </div>
+        </div>
+
+        <div class="menu-label">MENU PRINCIPAL</div>
+<nav>
+    <button class="nav-item ativo" data-page="dashboard">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="3" width="8" height="8" rx="1"/>
+            <rect x="14" y="3" width="7" height="5" rx="1"/>
+            <rect x="14" y="11" width="7" height="10" rx="1"/>
+            <rect x="3" y="14" width="8" height="7" rx="1"/>
+        </svg>
+        Visão geral
+    </button>
+
+    <button class="nav-item" data-page="produtos">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16v14H4z"/>
+            <path d="M8 7V4h8v3M8 12h8"/>
+        </svg>
+        Produtos
+    </button>
+
+    <button class="nav-item" data-page="vendas">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 3h14v18l-3-2-4 2-4-2-3 2z"/>
+            <path d="M9 8h6M9 12h6M9 16h3"/>
+        </svg>
+        Vendas
+    </button>
+
+    <button class="nav-item" data-page="estoque">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m3 7 9-4 9 4-9 4z"/>
+            <path d="M3 7v10l9 4 9-4V7"/>
+            <path d="M12 11v10"/>
+        </svg>
+        Estoque
+    </button>
+</nav>
+
+        <div class="sidebar-bottom">
+            <div class="system-status">
+                <span class="status-dot"></span>
+                SISTEMA OPERACIONAL
+            </div>
+            <div class="profile">
+                <div class="profile-icon">M</div>
+                <div>
+                    <strong>Administrador</strong>
+                    <small>Gerenciamento</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <span class="eyebrow">PAINEL DE CONTROLE / 001</span>
+                <p id="data-atual">Carregando data...</p>
+            </div>
+            <div class="topbar-right">
+                <span class="online-label">
+                    <span class="status-dot"></span> ONLINE
+                </span>
+            </div>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section class="page ativa" id="dashboard">
+
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">RESUMO OPERACIONAL</span>
+                    <h1>Visão geral<span class="orange">.</span></h1>
+                    <p>Confira o movimento da sua loja.</p>
+                </div>
+                <button class="button-primary" id="abrir-venda">
+                    + Nova venda
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card dark-card">
+                    <span>FATURAMENTO DO DIA</span>
+                    <h2 id="total-vendas">R$ 0,00</h2>
+                    <small>Valor acumulado</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>VENDAS REALIZADAS</span>
+                    <h2 id="quantidade-vendas">0</h2>
+                    <small>Transações registradas</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>PRODUTOS CADASTRADOS</span>
+                    <h2 id="quantidade-produtos">0</h2>
+                    <small>Itens no catálogo</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>ESTOQUE BAIXO</span>
+                    <h2 id="estoque-baixo">0</h2>
+                    <small>Produtos com 5 unidades ou menos</small>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <section class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">MOVIMENTAÇÃO</span>
+                            <h2>Vendas recentes</h2>
+                        </div>
+                        <button class="text-button" data-go="vendas">Ver todas →</button>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>PRODUTO</th>
+                                    <th>QUANTIDADE</th>
+                                    <th>TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-recentes">
+                                <tr>
+                                    <td colspan="3" class="empty">Nenhuma venda registrada.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="panel quick-panel">
+                    <span class="eyebrow">ATALHOS</span>
+                    <h2>Acesso rápido</h2>
+
+                    <button class="quick-action" data-go="produtos">
+                        <span>＋</span>
+                        <div>
+                            <strong>Cadastrar produto</strong>
+                            <small>Adicionar item ao catálogo</small>
+                        </div>
+                        <b>→</b>
+                    </button>
+
+                    <button class="quick-action" data-go="estoque">
+                        <span>▤</span>
+                        <div>
+                            <strong>Consultar estoque</strong>
+                            <small>Ver quantidades disponíveis</small>
+                        </div>
+                        <b>→</b>
+                    </button>
+
+                    <button class="quick-action" data-go="vendas">
+                        <span>▣</span>
+                        <div>
+                            <strong>Histórico de vendas</strong>
+                            <small>Consultar movimentações</small>
+                        </div>
+                        <b>→</b>
+                    </button>
+                </section>
+            </div>
+        </section>
+
+        <!-- PRODUTOS -->
+        <section class="page" id="produtos">
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">CATÁLOGO / 002</span>
+                    <h1>Produtos<span class="orange">.</span></h1>
+                    <p>Gerencie os produtos da sua loja.</p>
+                </div>
+                <button class="button-primary" id="abrir-produto">
+                    + Novo produto
+                </button>
+            </div>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <h2>Catálogo de produtos</h2>
+                    <span class="counter" id="contador-produtos">0 ITENS</span>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PRODUTO</th>
+                                <th>PREÇO</th>
+                                <th>ESTOQUE</th>
+                                <th>SITUAÇÃO</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-produtos"></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <!-- VENDAS -->
+        <section class="page" id="vendas">
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">TRANSAÇÕES / 003</span>
+                    <h1>Vendas<span class="orange">.</span></h1>
+                    <p>Histórico de vendas realizadas.</p>
+                </div>
+                <button class="button-primary" id="abrir-venda-2">
+                    + Nova venda
+                </button>
+            </div>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <h2>Histórico completo</h2>
+                    <span class="counter" id="contador-vendas">0 VENDAS</span>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PRODUTO</th>
+                                <th>QUANTIDADE</th>
+                                <th>PREÇO UNITÁRIO</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-vendas"></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <!-- ESTOQUE -->
+        <section class="page" id="estoque">
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">CONTROLE / 004</span>
+                    <h1>Estoque<span class="orange">.</span></h1>
+                    <p>Acompanhe a disponibilidade dos produtos.</p>
+                </div>
+            </div>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <h2>Posição do estoque</h2>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PRODUTO</th>
+                                <th>QUANTIDADE</th>
+                                <th>SITUAÇÃO</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-estoque"></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <footer>
+            CAIXA DA LOJA <span>•</span> SISTEMA DE GESTÃO
+            <span class="footer-version">VERSÃO 1.0</span>
+        </footer>
+
+    </main>
+</div>
+
+<!-- MODAL DE PRODUTO -->
+<div class="modal" id="modal-produto">
+    <div class="modal-box">
+        <div class="modal-heading">
+            <div>
+                <span class="eyebrow">CATÁLOGO</span>
+                <h2>Novo produto</h2>
+            </div>
+            <button class="close-modal" data-close="modal-produto">×</button>
+        </div>
+
+        <form id="form-produto">
+            <label for="nome-cadastro">Nome do produto</label>
+            <input id="nome-cadastro" type="text" placeholder="Ex: Arroz 5kg" required>
+
+            <label for="preco-cadastro">Preço unitário (R$)</label>
+            <input id="preco-cadastro" type="number" min="0.01" step="0.01" required>
+
+            <label for="estoque-cadastro">Quantidade inicial</label>
+            <input id="estoque-cadastro" type="number" min="0" step="1" required>
+
+            <button class="button-primary full-button" type="submit">
+                Cadastrar produto
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DE VENDA -->
+<div class="modal" id="modal-venda">
+    <div class="modal-box">
+        <div class="modal-heading">
+            <div>
+                <span class="eyebrow">TRANSAÇÃO</span>
+                <h2>Registrar venda</h2>
+            </div>
+            <button class="close-modal" data-close="modal-venda">×</button>
+        </div>
+
+        <form id="form-venda">
+            <label for="produto-venda">Produto</label>
+            <select id="produto-venda" required>
+                <option value="">Selecione um produto</option>
+            </select>
+
+            <label for="quantidade-venda">Quantidade</label>
+            <input id="quantidade-venda" type="number" min="1" step="1" value="1" required>
+
+            <div class="sale-total">
+                <span>TOTAL DA VENDA</span>
+                <strong id="valor-calculado">R$ 0,00</strong>
+            </div>
+
+            <button class="button-primary full-button" type="submit">
+                Confirmar venda
+            </button>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
